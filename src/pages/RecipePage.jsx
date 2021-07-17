@@ -11,6 +11,7 @@ export default function RecipePage(props) {
       const result = await axios.get(
         `https://ghywcwdod3.execute-api.us-east-2.amazonaws.com/dev/recipes/${id}`
       );
+      console.log(result);
       setRecipe(result.data.body.Items[0]);
     };
     getRecipe();

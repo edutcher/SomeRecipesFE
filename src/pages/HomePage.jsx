@@ -26,6 +26,7 @@ export default function HomePage() {
           {recipes ? (
             recipes.map((recipe) => (
               <RecipeCard
+                key={recipe.id}
                 name={recipe.RecipeName}
                 description={recipe.description}
                 imageUrl={recipe.image_url}

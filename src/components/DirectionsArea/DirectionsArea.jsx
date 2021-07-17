@@ -76,7 +76,11 @@ export default function DirectionsArea(props) {
               return (
                 <ListItem key={item}>
                   <ListItemText primary={item} />
-                  <ListItemIcon data-id={item} onClick={handleDeleteItem}>
+                  <ListItemIcon
+                    data-id={item}
+                    onClick={handleDeleteItem}
+                    style={{ marginLeft: "100px" }}
+                  >
                     <HighlightOffIcon />
                   </ListItemIcon>
                 </ListItem>
@@ -85,7 +89,12 @@ export default function DirectionsArea(props) {
           </List>
         </Grid>
       )}
-      <Grid item xs={12} sm={6}>
+      <Grid
+        item
+        xs={12}
+        sm={12}
+        style={{ marginTop: "25px", marginBottom: "50px" }}
+      >
         <TextField
           id="newDirection"
           name="newDirection"

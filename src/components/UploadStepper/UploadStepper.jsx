@@ -54,8 +54,7 @@ export default function UploadStepper(props) {
   const [tags, setTags] = useState([]);
   const [newTag, setNewTag] = useState("");
   const [final, setFinal] = useState(null);
-  const [dimensions, setDimensions] = useState({});
-  const { currentUser, changeUser } = useContext(UserContext);
+  const { currentUser } = useContext(UserContext);
   const history = useHistory();
   const [tagError, tagErrorText] = useValidation(newTag);
 
@@ -85,11 +84,13 @@ export default function UploadStepper(props) {
   };
 
   const handleSubmit = async () => {
-    const result = await axios.post(
-      `https://ghywcwdod3.execute-api.us-east-2.amazonaws.com/dev/photo/${title}/${currentUser.username}`,
-      JSON.stringify({ img: croppedImage })
-    );
-    console.log(result);
+    let result = null;
+    if (croppedImage) {
+      result = await axios.post(
+        `https://ghywcwdod3.execute-api.us-east-2.amazonaws.com/dev/photo/${title}/${currentUser.username}`,
+        JSON.stringify({ img: croppedImage })
+      );
+    }
 
     const recipe = {
       RecipeName: title,
@@ -99,8 +100,7 @@ export default function UploadStepper(props) {
       directions,
       time: totalTime,
       category,
-      image_url: result.data,
-      id: "6",
+      image_url: result ? result.data : null,
     };
 
     const recipeResult = await axios.post(
@@ -108,6 +108,7 @@ export default function UploadStepper(props) {
       recipe
     );
     console.log(recipeResult);
+    setFinal(recipeResult.data);
   };
 
   const isStepOptional = (step) => {
@@ -169,23 +170,6 @@ export default function UploadStepper(props) {
         return "Unknown step";
     }
   }
-
-  const dataURItoBlob = (dataURI) => {
-    var byteString = atob(dataURI.split(",")[1]);
-
-    var mimeString = dataURI.split(",")[0].split(":")[1].split(";")[0];
-
-    var ab = new ArrayBuffer(byteString.length);
-
-    var ia = new Uint8Array(ab);
-
-    for (var i = 0; i < byteString.length; i++) {
-      ia[i] = byteString.charCodeAt(i);
-    }
-
-    var blob = new Blob([ab], { type: mimeString });
-    return blob;
-  };
 
   const isStepSkipped = (step) => {
     return skipped.has(step);

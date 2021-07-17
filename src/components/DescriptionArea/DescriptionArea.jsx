@@ -74,8 +74,9 @@ export default function DescriptionArea(props) {
 
   return (
     <Grid container justify="center">
-      <Grid item xs={12} sm={6}>
+      <Grid item xs={12} sm={5}>
         <TextField
+          fullWidth
           id="title"
           name="title"
           label="Title"
@@ -84,7 +85,8 @@ export default function DescriptionArea(props) {
           onChange={handleTitleChange}
         />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid xs={0} sm={3}></Grid>
+      <Grid item xs={12} sm={3}>
         <FormControl required className={classes.formControl}>
           <InputLabel id="demo-simple-select-required-label">
             Category
@@ -107,22 +109,33 @@ export default function DescriptionArea(props) {
           <FormHelperText>Required</FormHelperText>
         </FormControl>
       </Grid>
-      <Grid item container xs={12} lg={12}>
-        <Grid item>
-          <TextField
-            id="description"
-            name="description"
-            value={description}
-            label="Description"
-            onChange={handleDescriptionChange}
-          />
-        </Grid>
+      <Grid
+        item
+        xs={12}
+        sm={5}
+        style={{ marginTop: "15px", marginBottom: "50px" }}
+      >
+        <TextField
+          fullWidth
+          required
+          id="description"
+          name="description"
+          value={description}
+          label="Description"
+          onChange={handleDescriptionChange}
+        />
       </Grid>
-      <Grid item xs={12} sm={6}>
+      <Grid xs={0} sm={3}></Grid>
+      <Grid
+        item
+        xs={12}
+        sm={3}
+        style={{ marginTop: "15px", marginBottom: "50px" }}
+      >
         <TextField
           id="totalTime"
           name="totalTime"
-          label="Total Time"
+          label="Total Time(minutes)"
           required
           value={totalTime}
           onChange={handleTimeChange}

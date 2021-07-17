@@ -1,5 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../contexts/UserContext";
 
 export default function AccountPage() {
-  return <h1>Account</h1>;
+  const { currentUser } = useContext(UserContext);
+  return <h1>Account {currentUser.username}</h1>;
 }

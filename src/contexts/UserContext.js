@@ -38,8 +38,10 @@ export function UserProvider(props) {
       const sess = await getSession();
 
       console.log(sess);
+      const { sub, username } = sess.accessToken.payload;
       changeUser({
-        userId: sess.accessToken.payload.sub,
+        userId: sub,
+        username,
       });
     };
     checkLoggedIn();

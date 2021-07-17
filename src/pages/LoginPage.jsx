@@ -99,8 +99,10 @@ export default function LoginPage() {
     user.authenticateUser(authDetails, {
       onSuccess: (data) => {
         console.log("succ:", data);
+        const { sub, username } = data.accessToken.payload;
         changeUser({
-          userId: data.accessToken.payload.sub,
+          userId: sub,
+          username,
         });
         history.push("/");
       },

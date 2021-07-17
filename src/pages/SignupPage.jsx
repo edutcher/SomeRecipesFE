@@ -96,8 +96,10 @@ export default function SignUp() {
           console.log(err);
         } else {
           console.log(result);
+          const { sub, username } = result;
           changeUser({
-            userId: result.sub,
+            userId: sub,
+            username,
           });
           history.push("/");
         }

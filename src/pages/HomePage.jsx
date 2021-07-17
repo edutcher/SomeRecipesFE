@@ -30,6 +30,7 @@ export default function HomePage() {
                 description={recipe.description}
                 imageUrl={recipe.image_url}
                 username={recipe.Username}
+                id={recipe.id}
               />
             ))
           ) : (

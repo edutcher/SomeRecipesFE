@@ -7,6 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles({
   root: {
@@ -19,11 +20,17 @@ const useStyles = makeStyles({
 
 export default function MediaCard(props) {
   const classes = useStyles();
-  const { imageUrl, name, username, description } = props;
+  const { imageUrl, name, username, description, id } = props;
+  const history = useHistory();
+
+  const handleClick = (e) => {
+    const id = e.currentTarget.getAttribute("data-id");
+    history.push(`/recipe/${id}`);
+  };
 
   return (
     <Card className={classes.root}>
-      <CardActionArea>
+      <CardActionArea onClick={handleClick} data-id={id} key={id}>
         <CardMedia className={classes.media} image={imageUrl} title={name} />
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">

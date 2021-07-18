@@ -19,6 +19,7 @@ import NotificationsIcon from "@material-ui/icons/Notifications";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import Brightness3Icon from "@material-ui/icons/Brightness3";
 import BrightnessHighIcon from "@material-ui/icons/BrightnessHigh";
+import CategoryMenu from "../CategoryMenu/CategoryMenu";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "../../contexts/UserContext";
 
@@ -150,7 +151,9 @@ export default function NavBar(props) {
   const handleLinkClick = (e) => {
     const name = e.currentTarget.getAttribute("name");
     if (name === "home") history.push("/");
-    else if (name === "profile" || name === "photo") {
+    else if (name === "profile") {
+      history.push(`/${name}/${currentUser.username}`);
+    } else if (name === "photo") {
       const id = e.target.getAttribute("data-id");
       history.push(`/${name}/${id}`);
     } else if (name === "logout") {
@@ -288,6 +291,7 @@ export default function NavBar(props) {
               />
             </div>
           </form>
+          <CategoryMenu />
           <div className={classes.grow} />
           {currentUser.userId ? (
             <Tooltip title="New Recipe">

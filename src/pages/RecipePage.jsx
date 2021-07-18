@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container, Typography, Paper } from "@material-ui/core";
+import { Grid, Container, Typography, Paper, Link } from "@material-ui/core";
+import { Link as RouterLink, useHistory } from "react-router-dom";
 import axios from "axios";
 
 export default function RecipePage(props) {
   const [recipe, setRecipe] = useState(null);
   const { id } = props.match.params;
+  const history = useHistory();
 
   useEffect(() => {
     const getRecipe = async () => {
@@ -18,6 +20,10 @@ export default function RecipePage(props) {
     return setRecipe(null);
   }, [id]);
 
+  const handleUserClick = () => {
+    history.push(`/profile/${recipe.Username}`);
+  };
+
   return (
     <Container style={{ marginTop: "50px" }}>
       {recipe && (
@@ -27,12 +33,21 @@ export default function RecipePage(props) {
               <Typography variant="h2" component="h2">
                 {recipe.RecipeName}
               </Typography>
-              <Typography variant="h4" component="h4">
+              <Typography variant="h4" component="h4" onClick={handleUserClick}>
                 by: {recipe.Username}
               </Typography>
             </Paper>
           </Grid>
-          <Grid item xs={6}></Grid>
+          <Grid item xs={6}>
+            <Paper>
+              <Typography variant="h4" component="h4">
+                {recipe.description}
+              </Typography>
+              <Typography variant="h5" component="h5">
+                Time: {recipe.time}
+              </Typography>
+            </Paper>
+          </Grid>
           {recipe.image_url ? (
             <img
               style={{ height: "300px" }}

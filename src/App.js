@@ -12,6 +12,7 @@ import NewRecipePage from "./pages/NewRecipePage.jsx";
 import RecipePage from "./pages/RecipePage.jsx";
 import TopPage from "./pages/TopPage.jsx";
 import ProfilePage from "./pages/ProfilePage.jsx";
+import CategoryPage from "./pages/CategoryPage.jsx";
 import SearchPage from "./pages/SearchPage.jsx";
 import { UserProvider } from "./contexts/UserContext";
 import { lightTheme, darkTheme } from "./themes/themes";
@@ -54,7 +55,8 @@ export default function App() {
             <Route exact path="/top" component={TopPage} />
             <Route exact path="/newrecipe" component={NewRecipePage} />
             <Route exact path="/recipe/:id" component={RecipePage} />
-            <Route exact path="/profile/:id" component={ProfilePage} />
+            <Route exact path="/category/:category" component={CategoryPage} />
+            <Route exact path="/profile/:username" component={ProfilePage} />
             <Route exact path="/" component={HomePage} />
           </Switch>
         </BrowserRouter>

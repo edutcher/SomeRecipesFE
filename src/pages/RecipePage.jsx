@@ -1,9 +1,23 @@
 import React, { useState, useEffect } from "react";
-import { Grid, Container, Typography, Paper, Link } from "@material-ui/core";
-import { Link as RouterLink, useHistory } from "react-router-dom";
+import { makeStyles } from "@material-ui/styles";
+import { Grid, Container, Typography, Paper } from "@material-ui/core";
+import { useHistory } from "react-router-dom";
 import axios from "axios";
 
+const useStyles = makeStyles((theme) => ({
+  cont: {
+    marginTop: theme.spacing(5),
+  },
+  paper: {
+    display: "inline-block",
+    marginBottom: theme.spacing(5),
+    padding: theme.spacing(3),
+    marginTop: theme.spacing(1),
+  },
+}));
+
 export default function RecipePage(props) {
+  const classes = useStyles();
   const [recipe, setRecipe] = useState(null);
   const { id } = props.match.params;
   const history = useHistory();
@@ -25,32 +39,32 @@ export default function RecipePage(props) {
   };
 
   return (
-    <Container style={{ marginTop: "50px" }}>
+    <Container className={classes.cont}>
       {recipe && (
         <Grid container>
           <Grid item xs={6}>
-            <Paper>
+            <Paper className={classes.paper}>
               <Typography variant="h2" component="h2">
                 {recipe.RecipeName}
               </Typography>
               <Typography variant="h4" component="h4" onClick={handleUserClick}>
                 by: {recipe.Username}
               </Typography>
+              <Typography variant="h6" component="h6">
+                {recipe.description}
+              </Typography>
             </Paper>
           </Grid>
           <Grid item xs={6}>
-            <Paper>
-              <Typography variant="h4" component="h4">
-                {recipe.description}
-              </Typography>
+            <Paper className={classes.paper}>
               <Typography variant="h5" component="h5">
-                Time: {recipe.time}
+                Time: {recipe.time} minutes
               </Typography>
             </Paper>
           </Grid>
           {recipe.image_url ? (
             <img
-              style={{ height: "300px" }}
+              style={{ height: "300px", marginBottom: "50px" }}
               src={recipe.image_url}
               alt={recipe.RecipeName}
             />
@@ -61,7 +75,7 @@ export default function RecipePage(props) {
             <Typography variant="h5" component="h5">
               Ingredients:
             </Typography>
-            <Paper>
+            <Paper className={classes.paper}>
               <ul>
                 {recipe.ingredients.map((item) => (
                   <li>{item}</li>
@@ -73,7 +87,7 @@ export default function RecipePage(props) {
             <Typography variant="h5" component="h5">
               Directions:
             </Typography>
-            <Paper>
+            <Paper className={classes.paper}>
               <ul>
                 {recipe.directions.map((item) => (
                   <li>{item}</li>

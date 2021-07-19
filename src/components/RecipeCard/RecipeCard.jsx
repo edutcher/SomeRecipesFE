@@ -7,14 +7,15 @@ import CardMedia from "@material-ui/core/CardMedia";
 import Typography from "@material-ui/core/Typography";
 import { useHistory } from "react-router";
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   root: {
-    maxWidth: 345,
+    width: 300,
+    margin: theme.spacing(2),
   },
   media: {
     height: 140,
   },
-});
+}));
 
 export default function MediaCard(props) {
   const classes = useStyles();

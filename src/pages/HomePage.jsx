@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import { makeStyles } from "@material-ui/styles";
 import { Grid, Container } from "@material-ui/core";
 import RecipeCard from "../components/RecipeCard/RecipeCard";
 
+const useStyles = makeStyles((theme) => ({
+  cont: {
+    marginTop: theme.spacing(5),
+  },
+}));
+
 export default function HomePage() {
+  const classes = useStyles();
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
@@ -21,7 +29,7 @@ export default function HomePage() {
   }, []);
   return (
     <div>
-      <Container>
+      <Container className={classes.cont}>
         <Grid container>
           {recipes ? (
             recipes.map((recipe) => (

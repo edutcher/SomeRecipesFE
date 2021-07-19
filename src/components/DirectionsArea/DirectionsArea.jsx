@@ -8,7 +8,6 @@ import {
   ListItemText,
   Grid,
   TextField,
-  Typography,
 } from "@material-ui/core";
 import AddCircleIcon from "@material-ui/icons/AddCircle";
 import HighlightOffIcon from "@material-ui/icons/HighlightOff";
